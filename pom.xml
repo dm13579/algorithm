@@ -11,6 +11,7 @@
     <modules>
         <module>sort</module>
         <module>tree</module>
+        <module>letcode</module>
     </modules>
 
 </project>
