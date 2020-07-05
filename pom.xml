@@ -12,6 +12,9 @@
         <module>sort</module>
         <module>tree</module>
         <module>letcode</module>
+        <module>array</module>
+        <module>linklist</module>
+        <module>stack</module>
     </modules>
 
 </project>
