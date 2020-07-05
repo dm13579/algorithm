@@ -1,46 +1,86 @@
 package com.dm.hfmtree;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class HuffmenTree {
 
 	HfmNode root;
-	List<HfmNode> leafs; // 叶子节点
-	Map<Character, Integer> weights; // 叶子节点的权重, a,b,c,d,e
+
+	/**
+	 * 叶子节点
+	 */
+	List<HfmNode> leafs;
+
+	/**
+	 * 叶子节点的权重
+	 */
+	Map<Character, Integer> weights;
+
+	/**
+	 * 编码结果
+	 */
+	public static Map<Character, String> code;
 
 	public HuffmenTree(Map<Character, Integer> weights) {
 		this.weights = weights;
 		leafs = new ArrayList<HfmNode>();
 	}
 
-	public void decode() { // 解码 不会给你们写的，留给课后作业
-
+	/**
+	 * 编码
+	 */
+	public String decode(String str) {
+		Map<Character, String> code = HuffmenTree.code;
+		StringBuilder sb = new StringBuilder();
+		char[] chars = str.toCharArray();
+		for (char c : chars) {
+			sb.append(code.get(c));
+		}
+		return sb.toString();
 	}
 
-	public void encode() { // 解码 不会给你们写的，留给课后作业
+	/**
+	 * 解码
+	 */
+	public String encode(String decode) {
+		char[] chars = decode.toCharArray();
+		StringBuilder sb = new StringBuilder();
+		String key = "";
+		for (char c : chars) {
+			key += c;
+			for (Map.Entry<Character, String> entry : code.entrySet()) {
+				if(entry.getValue().equals(key)){
+					sb.append(entry.getKey());
+					key = "";
+				}
+			}
+		}
 
+		return sb.toString();
 	}
 
-	// 叶子节点进行编码
+	/**
+	 * 叶子节点进行编码
+	 */
 	public Map<Character, String> code() {
 
 		Map<Character, String> map = new HashMap<Character, String>();
 		for (HfmNode node : leafs) {
 			String code = "";
-			Character c = new Character(node.chars.charAt(0)); // 叶子节点肯定只有一个字符
-			HfmNode current = node; // 只有一个点
+			// 叶子节点肯定只有一个字符
+			Character c = new Character(node.chars.charAt(0));
+			// 只有一个点
+			HfmNode current = node;
 			do {
-				if (current.parent != null && current == current.parent.left) { // 说明当前点是左边
+				// 说明当前点是左边
+				if (current.parent != null && current == current.parent.left) {
 					code = "0" + code;
 				} else {
 					code = "1" + code;
 				}
 				current = current.parent;
-			} while (current.parent != null); // parent == null就表示到了根节点
+			// parent == null就表示到了根节点
+			} while (current.parent != null);
 			map.put(c, code);
 			System.out.println(c + ":" + code);
 		}
@@ -49,24 +89,32 @@ public class HuffmenTree {
 	}
 
 	public void creatTree() {
-		Character keys[] = weights.keySet().toArray(new Character[0]); // 拿出所有的点
-		PriorityQueue<HfmNode> priorityQueue = new PriorityQueue<HfmNode>(); // jdk底层的优先队列
+		// 拿出所有的点
+		Character keys[] = weights.keySet().toArray(new Character[0]);
+		// jdk底层的优先队列
+		PriorityQueue<HfmNode> priorityQueue = new PriorityQueue<HfmNode>();
 		for (Character c : keys) {
 			HfmNode hfmNode = new HfmNode();
 			hfmNode.chars = c.toString();
-			hfmNode.fre = weights.get(c); // 权重
-			priorityQueue.add(hfmNode); // 首先把我们的优先队列初始化进去
+			// 权重
+			hfmNode.fre = weights.get(c);
+			// 首先把我们的优先队列初始化进去
+			priorityQueue.add(hfmNode);
 			leafs.add(hfmNode);
 		}
 
 		int len = priorityQueue.size();
-		for (int i = 1; i <= len - 1; i++) { // 每次找最小的两个点合并
-			HfmNode n1 = priorityQueue.poll(); //
-			HfmNode n2 = priorityQueue.poll(); // 每次取优先队列的前面两个 就一定是两个最小的
+		// 每次找最小的两个点合并
+		for (int i = 1; i <= len - 1; i++) {
+			// 每次取优先队列的前面两个 就一定是两个最小的
+			HfmNode n1 = priorityQueue.poll();
+			HfmNode n2 = priorityQueue.poll();
 
 			HfmNode newNode = new HfmNode();
-			newNode.chars = n1.chars + n2.chars; // 我们把值赋值一下，也可以不复制
-			newNode.fre = n1.fre + n2.fre; // 把权重相加
+			// 我们把值赋值一下，也可以不复制
+			newNode.chars = n1.chars + n2.chars;
+			// 把权重相加
+			newNode.fre = n1.fre + n2.fre;
 
 			// 维护出树的结构
 			newNode.left = n1;
@@ -76,7 +124,8 @@ public class HuffmenTree {
 
 			priorityQueue.add(newNode);
 		}
-		root = priorityQueue.poll(); // 最后这个点就是我们的根节点
+		// 最后这个点就是我们的根节点
+		root = priorityQueue.poll();
 		System.out.println("构建完成");
 	}
 
@@ -96,9 +145,14 @@ public class HuffmenTree {
 
 		HuffmenTree huffmenTree = new HuffmenTree(weights);
 		huffmenTree.creatTree();
-		Map<Character, String> code = huffmenTree.code();
+		HuffmenTree.code = huffmenTree.code();
 		String str = "aceg";
 		System.out.println("编码后的：");
+		String decode = huffmenTree.decode(str);
+		System.out.println(decode);
+		String encode = huffmenTree.encode(decode);
+		System.out.println("解码后的：");
+		System.out.println(encode);
 		char s[] = str.toCharArray();
 	}
 /*
