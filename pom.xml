@@ -15,6 +15,7 @@
         <module>array</module>
         <module>linklist</module>
         <module>stack</module>
+        <module>graph</module>
     </modules>
 
 </project>
