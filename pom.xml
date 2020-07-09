@@ -16,6 +16,7 @@
         <module>linklist</module>
         <module>stack</module>
         <module>graph</module>
+        <module>map</module>
     </modules>
 
 </project>
