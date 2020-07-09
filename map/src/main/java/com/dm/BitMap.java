@@ -13,10 +13,10 @@ public class BitMap {
 		
 		int bitsIndex = n >> 3;		// 除以8 就可以知道在那个byte
 		int loc = n % 8;		///这里其实还可以用&运算
-		System.out.println("添加前二进制:"+Integer.toBinaryString(bits[bitsIndex]));
+
 		//接下来就是要把bit数组里面的 bisIndex这个下标的byte里面的 第loc 个bit位置为1
 		bits[bitsIndex] |= 1 << loc; //
-		//
+		System.out.println("添加前二进制:"+Integer.toBinaryString(bits[bitsIndex]));
 	}
 
 	public void remove(int n){
