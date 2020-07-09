@@ -16,7 +16,7 @@ public class BitMap {
 
 		//接下来就是要把bit数组里面的 bisIndex这个下标的byte里面的 第loc 个bit位置为1
 		bits[bitsIndex] |= 1 << loc; //
-		System.out.println("添加前二进制:"+Integer.toBinaryString(bits[bitsIndex]));
+		System.out.println("添加后二进制:"+Integer.toBinaryString(bits[bitsIndex]));
 	}
 
 	public void remove(int n){
