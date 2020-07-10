@@ -18,8 +18,7 @@ public class ConsistentHash<T> {
      */
     private final SortedMap<Integer, T> circle = new TreeMap<>();
 
-    private ConsistentHash(int numberOfReplicas,
-                           Collection<T> nodes) {
+    private ConsistentHash(int numberOfReplicas, Collection<T> nodes) {
         this.numberOfReplicas = numberOfReplicas;
         for (T node : nodes) {
             add(node);
