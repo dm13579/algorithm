@@ -17,6 +17,7 @@
         <module>stack</module>
         <module>graph</module>
         <module>map</module>
+        <module>ik</module>
     </modules>
 
 </project>
