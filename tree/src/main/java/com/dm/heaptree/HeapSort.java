@@ -38,7 +38,7 @@ public class HeapSort {
      * @param start 开始堆化的点
      * @param end   堆化结束位置
      */
-    private static void heap(int[] data, int start, int end) {
+    public static void heap(int[] data, int start, int end) {
         int parent = start;
         // 下标是从0开始的就要加1，从1就不用
         int son = start * 2 + 1;
