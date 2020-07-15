@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * @author dm
- * @classname: Heap
+ * @classname: HeapSort
  * @description: 堆排序
  * @date 2020/7/15
  * @since JDK1.8

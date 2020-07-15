@@ -30,3 +30,14 @@ sort/sort.iml
 sort/target/classes/META-INF/
 sort/target/generated-sources/
 tree/tree.iml
+array/array.iml
+graph/graph.iml
+ik/ik.iml
+letcode/letcode.iml
+letcode/target/generated-sources/
+linklist/linklist.iml
+map/map.iml
+map/target/generated-sources/
+stack/stack.iml
+tree/target/classes/META-INF/
+tree/target/generated-sources/
