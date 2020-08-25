@@ -1,4 +1,4 @@
-package com.my.algorithm.tree;
+package com.dm.binarytree;
 
 import java.util.Scanner;
 
